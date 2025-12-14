@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BrainSprint Quiz</title>
+
+<style>
+body{
+    background:#111;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.container{
+    width:90%;
+    max-width:400px;
+    margin:auto;
+    margin-top:50px;
+    padding:20px;
+    border:2px solid gold;
+    border-radius:10px;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    font-size:16px;
+    cursor:pointer;
+}
+
+#score{
+    font-size:20px;
+    color:gold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>BrainSprint Quiz</h1>
+    <h2 id="question"></h2>
+
+    <button onclick="checkAnswer(0)" id="opt0"></button>
+    <button onclick="checkAnswer(1)" id="opt1"></button>
+    <button onclick="checkAnswer(2)" id="opt2"></button>
+    <button onclick="checkAnswer(3)" id="opt3"></button>
+
+    <p id="score"></p>
+</div>
+
+<script>
+let questions = [
+ {
+  q:"HTML stands for?",
+  options:["Hyper Text Markup Language","High Text Machine Language","Hyperlinks Text Mark Language","None"],
+  answer:0
+ },
+ {
+  q:"Which language is used for styling web pages?",
+  options:["HTML","Python","CSS","Java"],
+  answer:2
+ },
+ {
+  q:"Which is a programming language?",
+  options:["HTML","CSS","JavaScript","HTTP"],
+  answer:2
+ }
+];
+
+let current = 0;
+let score = 0;
+
+function loadQuestion(){
+ document.getElementById("question").innerText = questions[current].q;
+ document.getElementById("opt0").innerText = questions[current].options[0];
+ document.getElementById("opt1").innerText = questions[current].options[1];
+ document.getElementById("opt2").innerText = questions[current].options[2];
+ document.getElementById("opt3").innerText = questions[current].options[3];
+ document.getElementById("score").innerText = "Score: " + score;
+}
+
+function checkAnswer(option){
+ if(option === questions[current].answer){
+   score++;
+ }
+ current++;
+
+ if(current < questions.length){
+   loadQuestion();
+ } else {
+   document.querySelector(".container").innerHTML =
+   "<h1>Quiz Completed</h1><p>Your Score: "+score+"</p>";
+ }
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
